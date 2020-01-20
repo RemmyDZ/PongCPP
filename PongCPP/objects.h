@@ -25,3 +25,17 @@ struct Computer {
 		this->speed = speed;
 	}
 };
+
+struct Ball {
+	int x, y;
+	int speed;
+	bool direction[8] = { false, false, false, false, false, false, false, false }; //Ball has 8 directions in total
+
+	Ball(int x, int y, int speed, int startDirection)
+	{
+		this->x = x;
+		this->y = y;
+		this->speed = speed;
+		this->direction[startDirection] = true;
+	}
+};
