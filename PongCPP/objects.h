@@ -16,6 +16,23 @@ struct Player {
 		al_clear_to_color(al_map_rgb(255, 255, 255)); //Make the player bitmap white
 	}
 
+	void setDirection(int direction, bool state)
+	{
+		this->direction[direction] = state;
+	}
+
+	void move()
+	{
+		if (this->direction[UP])
+		{
+			this->y -= this->speed;
+		}
+		else if (this->direction[DOWN]) //Else if because player cannot move up and down at the same time
+		{
+			this->y += this->speed;
+		}
+	}
+
 	void draw()
 	{
 		al_draw_bitmap(this->bitmap, this->x, this->y, 0);

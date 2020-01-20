@@ -47,6 +47,7 @@ int main()
 		al_wait_for_event(event_queue, &event);
 		if (event.type == ALLEGRO_EVENT_TIMER)
 		{
+			player.move();
 			redraw = true;
 		}
 		if (event.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -56,12 +57,25 @@ int main()
 			case ALLEGRO_KEY_ESCAPE:
 				isGameFinished = true;
 				break;
+			case ALLEGRO_KEY_W:
+				player.setDirection(UP, true);
+				break;
+			case ALLEGRO_KEY_S:
+				player.setDirection(DOWN, true);
+				break;
 			}
-			//Player movement here
 		}
 		else if (event.type == ALLEGRO_EVENT_KEY_UP)
 		{
-			//Stop player movement here
+			switch (event.keyboard.keycode)
+			{
+			case ALLEGRO_KEY_W:
+				player.setDirection(UP, false);
+				break;
+			case ALLEGRO_KEY_S:
+				player.setDirection(DOWN, false);
+				break;
+			}
 		}
 		else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 		{
