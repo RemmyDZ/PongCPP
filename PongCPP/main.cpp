@@ -3,6 +3,7 @@
 #include<allegro5/allegro_native_dialog.h>
 #include<allegro5/allegro_primitives.h>
 #include"globals.h"
+#include"objects.h"
 
 int main()
 {
