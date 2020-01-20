@@ -24,6 +24,18 @@ struct Player {
 		this->direction[direction] = state;
 	}
 
+	void checkCollision()
+	{
+		if ((this->y - this->offsetY) <= 10)
+		{
+			this->y = this->offsetY + 10;
+		}
+		if ((this->y + this->offsetY) >= DISPLAY_HEIGHT - 10)
+		{
+			this->y = DISPLAY_HEIGHT - this->offsetY - 10;
+		}
+	}
+
 	void move()
 	{
 		if (this->direction[UP])
@@ -34,6 +46,12 @@ struct Player {
 		{
 			this->y += this->speed;
 		}
+	}
+
+	void update()
+	{
+		move();
+		checkCollision();
 	}
 
 	void draw()

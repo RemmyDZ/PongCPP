@@ -48,7 +48,7 @@ int main()
 		al_wait_for_event(event_queue, &event);
 		if (event.type == ALLEGRO_EVENT_TIMER)
 		{
-			player.move();
+			player.update();
 			redraw = true;
 		}
 		if (event.type == ALLEGRO_EVENT_KEY_DOWN)
