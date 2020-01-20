@@ -22,8 +22,12 @@ const int COMPUTER_SPEED = 5;
 const int COMPUTER_START_X = DISPLAY_WIDTH - 20;
 const int COMPUTER_START_Y = DISPLAY_HEIGHT / 2;
 
+const int BALL_SIZE = 10; //The ball is a square with BALL_SIZE * BALL_SIZE
+const int BALL_OFFSET = BALL_SIZE / 2;
 const int BALL_MIN_SPEED = 5;
 const int BALL_MAX_SPEED = 30;
+const int BALL_START_X = DISPLAY_WIDTH / 2;
+const int BALL_START_Y = DISPLAY_HEIGHT / 2;
 
 const int BOUNDARY_SIZE = 10; //Thickness of the boundaries on the top and bottom
 

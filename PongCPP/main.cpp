@@ -43,6 +43,7 @@ int main()
 	//Create objects
 	Player player(PLAYER_START_X, PLAYER_START_Y, PAD_OFFSET_X, PAD_OFFSET_Y, PLAYER_SPEED);
 	Computer computer(COMPUTER_START_X, COMPUTER_START_Y, PAD_OFFSET_X, PAD_OFFSET_Y, COMPUTER_SPEED);
+	Ball ball(BALL_START_X, BALL_START_Y, BALL_OFFSET, BALL_MIN_SPEED, RIGHT); //Start with the ball going towards the computer (right)
 
 	//Start timer
 	al_start_timer(timer);
@@ -96,6 +97,7 @@ int main()
 			//Draw objects here
 			player.draw();
 			computer.draw();
+			ball.draw();
 			al_flip_display();
 		}
 	}

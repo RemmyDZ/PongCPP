@@ -117,14 +117,25 @@ struct Computer {
 
 struct Ball {
 	int x, y;
+	int offset;
 	int speed;
 	bool direction[8] = { false, false, false, false, false, false, false, false }; //Ball has 8 directions in total
+	ALLEGRO_BITMAP* bitmap;
 
-	Ball(int x, int y, int speed, int startDirection)
+	Ball(int x, int y, int offset, int speed, int startDirection)
 	{
 		this->x = x;
 		this->y = y;
+		this->offset = offset;
 		this->speed = speed;
 		this->direction[startDirection] = true;
+		bitmap = al_create_bitmap(BALL_SIZE, BALL_SIZE);
+		al_set_target_bitmap(bitmap);
+		al_clear_to_color(al_map_rgb(255, 255, 255));
+	}
+
+	void draw()
+	{
+		al_draw_bitmap(this->bitmap, this->x - this->offset, this->y - this->offset, 0);
 	}
 };
