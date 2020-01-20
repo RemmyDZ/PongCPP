@@ -4,12 +4,21 @@ struct Player {
 	int x, y;
 	int speed;
 	bool direction[2] = { false, false }; //At the start, both directions (up and down) should be set to false
+	ALLEGRO_BITMAP* bitmap = NULL;
 
 	Player(int x, int y, int speed)
 	{
 		this->x = x;
 		this->y = y;
 		this->speed = speed;
+		bitmap = al_create_bitmap(20, 100);
+		al_set_target_bitmap(this->bitmap);
+		al_clear_to_color(al_map_rgb(255, 255, 255)); //Make the player bitmap white
+	}
+
+	void draw()
+	{
+		al_draw_bitmap(this->bitmap, this->x, this->y, 0);
 	}
 };
 

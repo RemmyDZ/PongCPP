@@ -42,6 +42,7 @@ int main()
 
 	while (!isGameFinished)
 	{
+		al_set_target_bitmap(al_get_backbuffer(display));
 		ALLEGRO_EVENT event;
 		al_wait_for_event(event_queue, &event);
 		if (event.type == ALLEGRO_EVENT_TIMER)
@@ -69,13 +70,18 @@ int main()
 		if (redraw && al_is_event_queue_empty(event_queue)) //Only redraw when the timer ticks and there are no events to be handled
 		{
 			redraw = false;
+			al_clear_to_color(al_map_rgb(0, 0, 0));
 			//Draw objects here
-			//al_draw_filled_rectangle(player.x, player.y, player.x+20, player.y+100, )
+			//al_draw_filled_rectangle(player.x, player.y, player.x + 20, player.y + 100, al_map_rgb(255, 255, 255));
+			player.draw();
+			al_flip_display();
 		}
 	}
 
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
+	al_destroy_timer(timer);
+	al_destroy_bitmap(player.bitmap);
 	al_shutdown_primitives_addon();
 	al_uninstall_keyboard();
 
