@@ -19,6 +19,7 @@ int main()
 		al_show_native_message_box(0, "Error", "Error", "Could not create display", 0, 0);
 		return 0;
 	}
+	al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST); //Use V-sync if available
 
 	al_init_primitives_addon();
 	al_install_keyboard();
