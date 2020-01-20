@@ -23,15 +23,31 @@ int main()
 	al_init_primitives_addon();
 	al_install_keyboard();
 
+	//Create timer
+	ALLEGRO_TIMER* timer = NULL;
+	timer = al_create_timer(1.0 / FPS);
+
+	//Create event queue and register all events
 	ALLEGRO_EVENT_QUEUE* event_queue;
 	event_queue = al_create_event_queue();
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
+	al_register_event_source(event_queue, al_get_timer_event_source(timer));
+
+	//Create objects
+	Player player(20, DISPLAY_HEIGHT / 2, 5);
+
+	//Start timer
+	al_start_timer(timer);
 
 	while (!isGameFinished)
 	{
 		ALLEGRO_EVENT event;
 		al_wait_for_event(event_queue, &event);
+		if (event.type == ALLEGRO_EVENT_TIMER)
+		{
+			redraw = true;
+		}
 		if (event.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
 			switch (event.keyboard.keycode)
@@ -49,6 +65,12 @@ int main()
 		else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 		{
 			isGameFinished = true;
+		}
+		if (redraw && al_is_event_queue_empty(event_queue)) //Only redraw when the timer ticks and there are no events to be handled
+		{
+			redraw = false;
+			//Draw objects here
+			//al_draw_filled_rectangle(player.x, player.y, player.x+20, player.y+100, )
 		}
 	}
 
