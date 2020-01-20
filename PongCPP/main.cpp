@@ -36,7 +36,7 @@ int main()
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 
 	//Create objects
-	Player player(20, DISPLAY_HEIGHT / 2, 5);
+	Player player(20, DISPLAY_HEIGHT / 2, 10, 50, 5);
 
 	//Start timer
 	al_start_timer(timer);
