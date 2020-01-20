@@ -14,7 +14,7 @@ struct Player {
 		this->offsetX = offsetX;
 		this->offsetY = offsetY;
 		this->speed = speed;
-		bitmap = al_create_bitmap(20, 100);
+		bitmap = al_create_bitmap(PAD_WIDTH, PAD_HEIGHT);
 		al_set_target_bitmap(this->bitmap);
 		al_clear_to_color(al_map_rgb(255, 255, 255)); //Make the player bitmap white
 	}
@@ -26,13 +26,13 @@ struct Player {
 
 	void checkCollision()
 	{
-		if ((this->y - this->offsetY) <= 10)
+		if ((this->y - this->offsetY) <= BOUNDARY_SIZE)
 		{
-			this->y = this->offsetY + 10;
+			this->y = this->offsetY + BOUNDARY_SIZE;
 		}
-		if ((this->y + this->offsetY) >= DISPLAY_HEIGHT - 10)
+		if ((this->y + this->offsetY) >= DISPLAY_HEIGHT - BOUNDARY_SIZE)
 		{
-			this->y = DISPLAY_HEIGHT - this->offsetY - 10;
+			this->y = DISPLAY_HEIGHT - this->offsetY - BOUNDARY_SIZE;
 		}
 	}
 
@@ -62,14 +62,56 @@ struct Player {
 
 struct Computer {
 	int x, y;
+	int offsetX, offsetY;
 	int speed;
 	bool direction[2] = { false, false };
+	ALLEGRO_BITMAP* bitmap = NULL;
 
-	Computer(int x, int y, int speed)
+	Computer(int x, int y, int offsetX, int offsetY, int speed)
 	{
 		this->x = x;
 		this->y = y;
+		this->offsetX = offsetX;
+		this->offsetY = offsetY;
 		this->speed = speed;
+		bitmap = al_create_bitmap(PAD_WIDTH, PAD_HEIGHT);
+		al_set_target_bitmap(bitmap);
+		al_clear_to_color(al_map_rgb(255, 255, 255));
+	}
+
+	void checkCollision()
+	{
+		if ((this->y - this->offsetY) <= BOUNDARY_SIZE)
+		{
+			this->y = this->offsetY + BOUNDARY_SIZE;
+		}
+		if ((this->y + this->offsetY) >= DISPLAY_HEIGHT - BOUNDARY_SIZE)
+		{
+			this->y = DISPLAY_HEIGHT - this->offsetY - BOUNDARY_SIZE;
+		}
+	}
+
+	void move()
+	{
+		if (this->direction[UP])
+		{
+			this->y -= this->speed;
+		}
+		else if (this->direction[DOWN]) 
+		{
+			this->y += this->speed;
+		}
+	}
+
+	void update()
+	{
+		move();
+		checkCollision();
+	}
+
+	void draw()
+	{
+		al_draw_bitmap(this->bitmap, this->x - this->offsetX, this->y - this->offsetY, 0);
 	}
 };
 

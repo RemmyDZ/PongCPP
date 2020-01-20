@@ -12,6 +12,11 @@ int main()
 		al_show_native_message_box(0, "Error", "Error", "Failed to initialize Allegro", 0, 0);
 		return 0;
 	}
+
+	//Allegro colors
+	ALLEGRO_COLOR BLACK = al_map_rgb(0, 0, 0);
+	ALLEGRO_COLOR WHITE = al_map_rgb(255, 255, 255);
+
 	ALLEGRO_DISPLAY* display;
 	display = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT); //Create a display
 	if (!display) //Throw an error message when display hasn't been created succesfully
@@ -36,7 +41,8 @@ int main()
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 
 	//Create objects
-	Player player(20, DISPLAY_HEIGHT / 2, 10, 50, 5);
+	Player player(PLAYER_START_X, PLAYER_START_Y, PAD_OFFSET_X, PAD_OFFSET_Y, PLAYER_SPEED);
+	Computer computer(COMPUTER_START_X, COMPUTER_START_Y, PAD_OFFSET_X, PAD_OFFSET_Y, COMPUTER_SPEED);
 
 	//Start timer
 	al_start_timer(timer);
@@ -49,6 +55,7 @@ int main()
 		if (event.type == ALLEGRO_EVENT_TIMER)
 		{
 			player.update();
+			computer.update();
 			redraw = true;
 		}
 		if (event.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -87,8 +94,8 @@ int main()
 			redraw = false;
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 			//Draw objects here
-			//al_draw_filled_rectangle(player.x, player.y, player.x + 20, player.y + 100, al_map_rgb(255, 255, 255));
 			player.draw();
+			computer.draw();
 			al_flip_display();
 		}
 	}

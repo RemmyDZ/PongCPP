@@ -9,5 +9,23 @@ const int DOWN = 1;
 const int LEFT = 2;
 const int RIGHT = 3;
 
+const int PAD_HEIGHT = 100;
+const int PAD_WIDTH = 20;
+const int PAD_OFFSET_X = PAD_WIDTH / 2;
+const int PAD_OFFSET_Y = PAD_HEIGHT / 2;
+
+const int PLAYER_SPEED = 5;
+const int PLAYER_START_X = 20;
+const int PLAYER_START_Y = DISPLAY_HEIGHT / 2;
+
+const int COMPUTER_SPEED = 5;
+const int COMPUTER_START_X = DISPLAY_WIDTH - 20;
+const int COMPUTER_START_Y = DISPLAY_HEIGHT / 2;
+
+const int BALL_MIN_SPEED = 5;
+const int BALL_MAX_SPEED = 30;
+
+const int BOUNDARY_SIZE = 10; //Thickness of the boundaries on the top and bottom
+
 bool isGameFinished = false;
 bool redraw = true;
